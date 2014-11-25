@@ -6,39 +6,37 @@ class TileTest extends \PHPUnit_Framework_TestCase
     {
         $tile = new Challenge\Tile('cymk');
 
-        $this->assertSame('c', $tile->getNorth());
-        $this->assertSame('y', $tile->getEast());
-        $this->assertSame('m', $tile->getSouth());
-        $this->assertSame('k', $tile->getWest());
+        $this->assertSame('c', chr($tile->getNorth()));
+        $this->assertSame('y', chr($tile->getEast()));
+        $this->assertSame('m', chr($tile->getSouth()));
+        $this->assertSame('k', chr($tile->getWest()));
 
         $tile->rotate();
 
-        $this->assertSame('k', $tile->getNorth());
-        $this->assertSame('c', $tile->getEast());
-        $this->assertSame('y', $tile->getSouth());
-        $this->assertSame('m', $tile->getWest());
+        $this->assertSame('k', chr($tile->getNorth()));
+        $this->assertSame('c', chr($tile->getEast()));
+        $this->assertSame('y', chr($tile->getSouth()));
+        $this->assertSame('m', chr($tile->getWest()));
 
         $tile->rotate();
 
-        $this->assertSame('m', $tile->getNorth());
-        $this->assertSame('k', $tile->getEast());
-        $this->assertSame('c', $tile->getSouth());
-        $this->assertSame('y', $tile->getWest());
+        $this->assertSame('m', chr($tile->getNorth()));
+        $this->assertSame('k', chr($tile->getEast()));
+        $this->assertSame('c', chr($tile->getSouth()));
+        $this->assertSame('y', chr($tile->getWest()));
 
         $tile->rotate();
 
-        $this->assertSame('y', $tile->getNorth());
-        $this->assertSame('m', $tile->getEast());
-        $this->assertSame('k', $tile->getSouth());
-        $this->assertSame('c', $tile->getWest());
+        $this->assertSame('y', chr($tile->getNorth()));
+        $this->assertSame('m', chr($tile->getEast()));
+        $this->assertSame('k', chr($tile->getSouth()));
+        $this->assertSame('c', chr($tile->getWest()));
 
         $tile->rotate();
 
-        $this->assertSame('c', $tile->getNorth());
-        $this->assertSame('y', $tile->getEast());
-        $this->assertSame('m', $tile->getSouth());
-        $this->assertSame('k', $tile->getWest());
-
-        $this->assertTrue(true);
+        $this->assertSame('c', chr($tile->getNorth()));
+        $this->assertSame('y', chr($tile->getEast()));
+        $this->assertSame('m', chr($tile->getSouth()));
+        $this->assertSame('k', chr($tile->getWest()));
     }
 }

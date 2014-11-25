@@ -8,28 +8,23 @@ class GridTest extends \PHPUnit_Framework_TestCase
 
         $tile = new \Challenge\Tile('abcd');
 
-        $this->assertFalse($gird->hasNeighbors($tile));
-        $this->assertFalse($gird->hasNeighborTop($tile));
-        $this->assertFalse($gird->hasNeighborLeft($tile));
+        $this->assertFalse($gird->hasNeighborTop());
+        $this->assertFalse($gird->hasNeighborLeft());
 
-        $tile->setPosition(1);
         $gird->add($tile);
 
-        $this->assertTrue($gird->hasNeighbors($tile));
-        $this->assertFalse($gird->hasNeighborTop($tile));
-        $this->assertTrue($gird->hasNeighborLeft($tile));
+        $this->assertFalse($gird->hasNeighborTop());
+        $this->assertTrue($gird->hasNeighborLeft());
 
-        $tile->setPosition(2);
+        $gird->add($tile);
 
-        $this->assertTrue($gird->hasNeighbors($tile));
-        $this->assertTrue($gird->hasNeighborTop($tile));
-        $this->assertFalse($gird->hasNeighborLeft($tile));
+        $this->assertTrue($gird->hasNeighborTop());
+        $this->assertFalse($gird->hasNeighborLeft());
 
-        $tile->setPosition(3);
+        $gird->add($tile);
 
-        $this->assertTrue($gird->hasNeighbors($tile));
-        $this->assertTrue($gird->hasNeighborTop($tile));
-        $this->assertTrue($gird->hasNeighborLeft($tile));
+        $this->assertTrue($gird->hasNeighborTop());
+        $this->assertTrue($gird->hasNeighborLeft());
     }
 
     public function testMeetingTheNeighborhood()
@@ -43,12 +38,15 @@ class GridTest extends \PHPUnit_Framework_TestCase
             $tile_3 = new \Challenge\Tile('abcd'),
         ];
 
-        $grid->setTileSet($tileSet);
+        $grid->add($tile_0);
+        $this->assertSame($tile_0, $grid->getNeighborLeft());
 
-        $this->assertSame($tile_0, $grid->getNeighborLeft($tile_1));
-        $this->assertSame($tile_0, $grid->getNeighborTop($tile_2));
-        $this->assertSame($tile_2, $grid->getNeighborLeft($tile_3));
-        $this->assertSame($tile_1, $grid->getNeighborTop($tile_3));
+        $grid->add($tile_1);
+        $this->assertSame($tile_0, $grid->getNeighborTop());
+
+        $grid->add($tile_2);
+        $this->assertSame($tile_2, $grid->getNeighborLeft());
+        $this->assertSame($tile_1, $grid->getNeighborTop());
 
     }
 
@@ -65,7 +63,7 @@ class GridTest extends \PHPUnit_Framework_TestCase
             $tile_3 = new \Challenge\Tile('abcd'),
         ];
 
-        $grid->setTileSet($tileSet);
+        $grid->add($tile_0);
 
         $this->assertFalse($grid->isEmpty());
     }

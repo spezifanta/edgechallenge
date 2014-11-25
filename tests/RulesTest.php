@@ -18,15 +18,15 @@ class RulesTest extends \PHPUnit_Framework_TestCase
         $grid->add($tile_d);
 
         $this->assertFalse($rules->isValid($tile_a));
-        $this->assertSame('k', $tile_a->getWest());
+        $this->assertSame(ord('k'), $tile_a->getWest());
         $tile_a->rotate();
-        $this->assertSame('y', $tile_a->getWest());
+        $this->assertSame(ord('y'), $tile_a->getWest());
         $this->assertTrue($rules->isValid($tile_a));
         $grid->add($tile_a);
 
         $this->assertFalse($rules->isValid($tile_c));
         $tile_c->rotate();
-        $this->assertSame('k', $tile_c->getNorth());
+        $this->assertSame(ord('k'), $tile_c->getNorth());
         $this->assertTrue($rules->isValid($tile_c));
         $grid->add($tile_c);
 
@@ -46,17 +46,11 @@ class RulesTest extends \PHPUnit_Framework_TestCase
     {
         $rules = new \Challenge\Rules(new \Challenge\Grid(2));
 
-        $this->assertTrue($rules->compare('C', 'c'));
-        $this->assertTrue($rules->compare('c', 'C'));
-        $this->assertTrue($rules->compare('Y', 'y'));
-        $this->assertTrue($rules->compare('y', 'Y'));
-        $this->assertTrue($rules->compare('M', 'm'));
-        $this->assertTrue($rules->compare('m', 'M'));
-        $this->assertTrue($rules->compare('K', 'k'));
-        $this->assertTrue($rules->compare('k', 'K'));
+        $this->assertTrue($rules->compare(ord('C'), ord('c')));
+        $this->assertTrue($rules->compare(ord('c'), ord('C')));
 
-        $this->assertFalse($rules->compare('C', 'C'));
-        $this->assertFalse($rules->compare('C', 'Y'));
-        $this->assertFalse($rules->compare('C', 'y'));
+        $this->assertFalse($rules->compare(ord('C'), ord('C')));
+        $this->assertFalse($rules->compare(ord('C'), ord('Y')));
+        $this->assertFalse($rules->compare(ord('C'), ord('y')));
     }
 }

@@ -15,14 +15,14 @@ class Tile
     private $orientation;
 
     /**
-     * @var int
-     */
-    private $position;
-
-    /**
      * @var string
      */
     private $context;
+
+    /**
+     * @var array
+     */
+    private $asciiMap;
 
     /**
      * @param $context
@@ -32,9 +32,13 @@ class Tile
     {
         $this->context = $context;
         $this->name = $name;
-        $this->orientation = 0;  // north;
+        $this->orientation = 0;
+        $this->convert();
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
@@ -53,7 +57,7 @@ class Tile
      */
     public function getNorth()
     {
-        return $this->context[$this->orientation % 4];
+        return $this->asciiMap[$this->orientation % 4];
     }
 
     /**
@@ -61,7 +65,7 @@ class Tile
      */
     public function getEast()
     {
-        return $this->context[($this->orientation + 1) % 4];
+        return $this->asciiMap[($this->orientation + 1) % 4];
     }
 
     /**
@@ -69,7 +73,7 @@ class Tile
      */
     public function getSouth()
     {
-        return $this->context[($this->orientation + 2) % 4];
+        return $this->asciiMap[($this->orientation + 2) % 4];
     }
 
     /**
@@ -77,27 +81,7 @@ class Tile
      */
     public function getWest()
     {
-        return $this->context[($this->orientation + 3) % 4];
-    }
-
-    /**
-     * @param $position
-     *
-     * @return $this
-     */
-    public function setPosition($position)
-    {
-        $this->position = $position;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPosition()
-    {
-        return $this->position;
+        return $this->asciiMap[($this->orientation + 3) % 4];
     }
 
     /**
@@ -105,18 +89,33 @@ class Tile
      */
     public function __toString()
     {
-        return $this->name . '('. $this->getOrientationAsString() . ')' . $this->getNorth() . $this->getEast() . $this->getSouth() . $this->getWest();
+        return $this->name . ' ('. $this->getOrientationAsString() . ')';
     }
 
-    public function getOrientationAsString()
+    /**
+     * @return string
+     */
+    private function getOrientationAsString()
     {
-        $o = [
+        $orientations = [
             0 => 'N',
             3 => 'E',
             2 => 'S',
             1 => 'W'
         ];
 
-        return $o[$this->orientation];
+        return $orientations[$this->orientation];
+    }
+
+    /**
+     * Save decimal value of each char.
+     */
+    private function convert()
+    {
+        $this->asciiMap = str_split($this->context);
+
+        array_walk($this->asciiMap, function (&$element) {
+            $element = ord($element);
+        });
     }
 }

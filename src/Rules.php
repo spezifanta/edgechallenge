@@ -2,7 +2,6 @@
 
 namespace Challenge;
 
-
 class Rules
 {
     /**
@@ -10,6 +9,9 @@ class Rules
      */
     private $grid;
 
+    /**
+     * @param Grid $grid
+     */
     public function __construct(Grid $grid)
     {
         $this->grid = $grid;
@@ -24,20 +26,18 @@ class Rules
      */
     public function isValid(Tile $tile)
     {
-        if (!$this->grid->hasNeighbors($tile)) {
-            return true;
+        $top = true;
+        $left = true;
+
+        if ($this->grid->hasNeighborLeft($tile)) {
+            $top = $this->compareToLeft($tile);
         }
 
-        if (!$this->grid->hasNeighborTop($tile) && $this->grid->hasNeighborLeft($tile)) {
-            return $this->compareToLeft($tile);
+        if ($this->grid->hasNeighborTop($tile)) {
+             $left = $this->compareToTop($tile);
         }
 
-        if ($this->grid->hasNeighborTop($tile) && !$this->grid->hasNeighborLeft($tile)) {
-            return $this->compareToTop($tile);
-        }
-
-        return $this->compareToTop($tile) && $this->compareToLeft($tile);
-
+        return $top && $left;
     }
 
     /**
@@ -46,9 +46,8 @@ class Rules
      * @return bool
      */
     public function compareToTop(Tile $tile){
-        //printf("Comparing $tile to top\n");
         return $this->compare(
-            $this->grid->getNeighborTop($tile)->getSouth(),
+            $this->grid->getNeighborTop()->getSouth(),
             $tile->getNorth()
         );
     }
@@ -59,42 +58,22 @@ class Rules
      * @return bool
      */
     public function compareToLeft(Tile $tile) {
-        //printf("Comparing $tile to left\n");
         return $this->compare(
-            $this->grid->getNeighborLeft($tile)->getEast(),
+            $this->grid->getNeighborLeft()->getEast(),
             $tile->getWest()
         );
     }
 
     /**
-     * Compare to sides. Match C -> c and c -> C
+     * Compare to sides. Matches C -> c and c -> C
      *
-     * @param string $first
-     * @param string $second
+     * @param int $first
+     * @param int $second
      *
      * @return bool
      */
     public function compare($first, $second)
     {
-        switch ($first) {
-            case 'C':
-                return $second === 'c';
-            case 'Y':
-                return $second === 'y';
-            case 'M':
-                return $second === 'm';
-            case 'K':
-                return $second === 'k';
-            case 'c':
-                return $second === 'C';
-            case 'y':
-                return $second === 'Y';
-            case 'm':
-                return $second === 'M';
-            case 'k':
-                return $second === 'K';
-            default:
-                return false;
-        }
+        return abs($first - $second) == 32;
     }
 }

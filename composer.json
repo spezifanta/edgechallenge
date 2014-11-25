@@ -1,5 +1,6 @@
 {
-    "name": "alex/edgechallange",
+    "name": "alex/edgechallenge",
+    "license": "MIT",
     "require-dev": {
         "phpunit/phpunit": "~4.3"
     },
@@ -9,7 +10,7 @@
         }
     ],
     "require": {
-        "symfony/console": "*"
+        "php": ">=5.5"
     },
     "autoload": {
         "psr-4": {
