@@ -1,0 +1,22 @@
+{
+    "name": "alex/edgechallange",
+    "require-dev": {
+        "phpunit/phpunit": "~4.3"
+    },
+    "authors": [
+        {
+            "name": "Alex Kuhrt"
+        }
+    ],
+    "require": {
+        "symfony/console": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Challenge\\": "src/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
