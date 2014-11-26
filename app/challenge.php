@@ -15,32 +15,8 @@ $tileSet = [
     new \Challenge\Tile('Ckmy', 'I'),
 ];
 
-/**
- * Solutions
- *
- *  I(N)Ckmy
- *  H(E)yCMK
- *  D(W)YkYc
- *  C(E)McKy
- *  F(S)yMck
- *  E(S)kyCM
- *  G(S)MKCY
- *  A(N)CYMk
- *
- *  D(S)kYcY
- *  F(E)Mcky
- *  A(W)YMkC
- *  H(N)CMKy
- *  B(S)KmCm
- *  G(E)KCYM
- *  I(W)kmyC
- *  C(N)cKyM
- *  E(E)yCMk
- */
-
 $grid = new \Challenge\Grid(3);
 $rules = new \Challenge\Rules($grid);
-
 
 $i = 0;
 foreach (permutations($tileSet) as $set) {

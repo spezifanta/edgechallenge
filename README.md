@@ -14,10 +14,36 @@ http://www.reddit.com/r/dailyprogrammer/comments/2ip1gj/10082014_challenge_183_i
 
 ```composer install```
 
+
 ## Run Challenge
 
 ```php -d memory_limit=-1 app/challenge.php```
 
+
 ## Test
 
 ```bin/phpunit --bootstrap app/bootstrap.php --colors ./tests```
+
+
+## Solutions found
+```
+ *  I(N)Ckmy
+ *  H(E)yCMK
+ *  D(W)YkYc
+ *  C(E)McKy
+ *  F(S)yMck
+ *  E(S)kyCM
+ *  G(S)MKCY
+ *  A(N)CYMk
+ ```
+ ```
+ *  D(S)kYcY
+ *  F(E)Mcky
+ *  A(W)YMkC
+ *  H(N)CMKy
+ *  B(S)KmCm
+ *  G(E)KCYM
+ *  I(W)kmyC
+ *  C(N)cKyM
+ *  E(E)yCMk
+ ```
